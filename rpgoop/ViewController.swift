@@ -20,6 +20,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var chestButton: UIButton!
     
+    @IBOutlet weak var attackBtn: UIButton!
+    
     var player: Player!
     var enemy: Enemy!
     
@@ -38,6 +40,7 @@ class ViewController: UIViewController {
     }
     
     func generateRandomEnemy(){
+        
         // generating either a 1 or 0
         let rand = Int(arc4random_uniform(2))
         
@@ -49,39 +52,49 @@ class ViewController: UIViewController {
         enemyImg.hidden = false
         enemyHpLbl.text = "\(enemy.hp) HP"
         printLbl.text = "You are now fighting a \(enemy.type)"
+        attackBtn.enabled = true
+        
     }
     
     @IBAction func onChestTapped(sender: AnyObject) {
         chestButton.hidden = true
         printLbl.text = chestMessage
+        enemyHpLbl.text = "Huzzah!"
         
         NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "generateRandomEnemy", userInfo: nil, repeats: false)
-        enemyHpLbl.text = "Huzzah!"
         
     }
 
     @IBAction func attackTapped(sender: AnyObject) {
-        
-        if enemy.attemptAttack(player.attackPwr) {
+
+        if enemy.attemptAttack(player.attackPwr) && enemy.isAlive {
             printLbl.text = "Attacked \(enemy.type) for \(player.attackPwr) HP!"
             enemyHpLbl.text = "\(enemy.hp) HP"
         } else {
             printLbl.text = "Attack was unsuccessful!"
         }
         
-        if let loot = enemy.dropLoot() {
-            player.addItemToInventory(loot)
-            chestMessage = "\(player.name) found \(loot)!"
-            chestButton.hidden = false
-        }
-        
         if !enemy.isAlive {
-            enemyHpLbl.text = "Loot!"
             printLbl.text = "You defeated the \(enemy.type)!"
             enemyImg.hidden = true
+            dropLoot()
         }
+
     }
     
+    func dropLoot() {
+        
+        if let loot = enemy.dropLoot() {
+            
+            player.addItemToInventory(loot)
+            chestMessage = "\(player.name) found \(loot)!"
+            attackBtn.enabled = false
+            chestButton.hidden = false
+            enemyHpLbl.text = "Loot!"
+            
+        }
+        
+    }
     
 // need a player and enemy class. Are there any traits among them that should be shared? Maybe into a parent class. Health? Attack Power?
 

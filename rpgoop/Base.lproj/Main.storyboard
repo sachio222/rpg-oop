@@ -157,6 +157,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="attackBtn" destination="DL3-Yg-fWu" id="E6U-YF-PL3"/>
                         <outlet property="chestButton" destination="7m3-WA-DWO" id="DfK-8u-dJj"/>
                         <outlet property="enemyHpLbl" destination="9MV-B8-N4J" id="aJy-uG-yrB"/>
                         <outlet property="enemyImg" destination="vvA-38-8bR" id="aMn-Ai-zfk"/>
