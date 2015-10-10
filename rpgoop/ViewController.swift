@@ -35,8 +35,6 @@ class ViewController: UIViewController {
         
         // generate a random enemy
         generateRandomEnemy()
-        
-        enemyHpLbl.text = "\(enemy.hp) HP"
     }
     
     func generateRandomEnemy(){
@@ -49,6 +47,8 @@ class ViewController: UIViewController {
             enemy = DevilWizard(startingHP: 60, attackPwr: 15)
         }
         enemyImg.hidden = false
+        enemyHpLbl.text = "\(enemy.hp) HP"
+        printLbl.text = "You are now fighting a \(enemy.type)"
     }
     
     @IBAction func onChestTapped(sender: AnyObject) {
@@ -56,6 +56,7 @@ class ViewController: UIViewController {
         printLbl.text = chestMessage
         
         NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "generateRandomEnemy", userInfo: nil, repeats: false)
+        enemyHpLbl.text = "Huzzah!"
         
     }
 
@@ -75,8 +76,8 @@ class ViewController: UIViewController {
         }
         
         if !enemy.isAlive {
-            enemyHpLbl.text = "Victory!"
-            printLbl.text = "Defeated \(enemy.type)"
+            enemyHpLbl.text = "Loot!"
+            printLbl.text = "You defeated the \(enemy.type)!"
             enemyImg.hidden = true
         }
     }
