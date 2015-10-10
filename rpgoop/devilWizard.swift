@@ -8,7 +8,7 @@
 
 import Foundation
 
-class devilWizard : Enemy {
+class DevilWizard : Enemy {
     override var loot: [String] {
         return ["Magic wand", "Dark Amulet", "Salted Pork"]
     }
