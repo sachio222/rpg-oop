@@ -15,10 +15,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+// need a player and enemy class. Are there any traits among them that should be shared? Maybe into a parent class. Health? Attack Power?
 
 
 }
